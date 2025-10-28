@@ -1,0 +1,28 @@
+# fly.toml app configuration file generated for xrpl-nft-whitelist
+
+app = "xrpl-nft-whitelist"
+primary_region = "iad"
+
+[build]
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[vm]]
+  memory = "256mb"
+  cpu_kind = "shared"
+  cpus = 1
+
+[mounts]
+  source = "data"
+  destination = "/data"
+
+[env]
+  PORT = "8080"
+  DATABASE_URL = "sqlite:////data/app.db"
+  SUPER_ADMIN_WALLET = "rKhHA3suVVRtJpUQE5vZntyMTWvd9hBxg1"
